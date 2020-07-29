@@ -1,0 +1,10 @@
+{
+    "project_name": "Foo Application",
+    "repo_name": "foo_bar",
+    "description": "My Foo Bar Application",
+    "author": "Foo",
+    "author_email": "foo@example.com",
+    "username": "foo-bar",
+    "url": "https://github.com/{{cookiecutter.username}}/{{cookiecutter.repo_name}}",
+    "keywords": ""
+}
