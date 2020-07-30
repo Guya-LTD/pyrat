@@ -25,6 +25,13 @@ except:  # noqa: E722
     reqs = [str(ir.requirement) for ir in install_reqs]
 
 
+try:
+    from semantic_release import setup_hook
+    setup_hook(sys.argv)
+except ImportError as imerr:
+    sys.exit('Error importing semanitc release', imerr)
+
+
 here = pathlib.Path(__file__).parent.resolve()
 
 # Get the long description from the README file
