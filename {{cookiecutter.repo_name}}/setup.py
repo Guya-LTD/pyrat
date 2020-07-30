@@ -8,7 +8,6 @@ https://github.com/pypa/sampleproject
 # Always prefer setuptools over distutils
 from setuptools import setup, find_packages
 import pathlib
-import sys
 import uuid
 
 try: # for pip >= 10
@@ -20,7 +19,7 @@ install_reqs = parse_requirements('requirements.txt', session=uuid.uuid1())
 
 try:
     reqs = [str(ir.req) for ir in install_reqs]
-except:
+except:  # noqa: E722
     reqs = [str(ir.requirement) for ir in install_reqs]
 
 
