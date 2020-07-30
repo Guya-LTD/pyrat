@@ -28,8 +28,10 @@ Project
 """
 
 
-
 """This module registers the error handler on the application."""
+
+
+from werkzeug.exceptions import HTTPException, default_exceptions
 
 
 def register_handler(app):
@@ -39,4 +41,36 @@ def register_handler(app):
     ----------
         app (flask.app.Flask): The application instance.
     """
-    pass
+    
+    def generic_http_error_handler(error):
+        """Deal with HTTP exceptions.
+
+        Parameters:
+        ----------
+            error (HTTPException): A werkzeug.exceptions.BadRequest exception object.
+
+        Returns:
+        -------
+            A flask response object.
+        """
+        if isinstance(error, HTTPException):
+            result = {
+                'code': error.code, 
+                'description': error.description, 
+                'type': 'HTTPException',
+                'message': str(error)}
+        else:
+            result = {
+                'code': 500, 
+                'description': 'Internal Server Error',
+                'type': 'Other Exceptions',
+                'message': str(error)}
+
+        #logger.exception(str(error), extra=result.update(EXTRA))
+        resp = jsonify(result)
+        resp.status_code = result['code']
+        return resp
+
+    # register http code errors
+    for code in default_exceptions.keys():
+        app.register_error_handler(code, error_handling)

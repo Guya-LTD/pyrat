@@ -48,6 +48,7 @@ from dotenv import load_dotenv
 
 from .blueprint.v1 import *
 from .config import config_by_name
+from .handlers import register_handler
 
 # const vars
 __version__ = '0.0.1'
@@ -80,6 +81,7 @@ def create_app(test_config: dict = {}) -> Flask:
 
     load_dotenv()
     load_config(app)
+    register_handler(app)
 
     init_database(app)
     init_blueprints(app)
