@@ -50,6 +50,9 @@ from .blueprint.v1 import *
 from .config import config_by_name
 from .handlers import register_handler
 
+# import all controllers
+from {{cookiecutter.repo_name}}.controller.v1 import foo_controller
+
 # const vars
 __version__ = '0.0.1'
 __email__ = '{{cookiecutter.author_email}}'

@@ -31,6 +31,7 @@ Project
 """This module registers the error handler on the application."""
 
 
+from flask import jsonify
 from werkzeug.exceptions import HTTPException, default_exceptions
 
 
@@ -73,4 +74,4 @@ def register_handler(app):
 
     # register http code errors
     for code in default_exceptions.keys():
-        app.register_error_handler(code, error_handling)
+        app.register_error_handler(code, generic_http_error_handler)
